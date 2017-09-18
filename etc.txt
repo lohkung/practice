@@ -1,0 +1,138 @@
+- ssh-keygen
+-  ssh-copy-id golfie@192.2.200.240
+
+Clone
+git clone golfie@192.2.200.240:/git/repos/tcl/eticket/backend.git
+ @192.2.200.240:/git/repos/tcl/eticket/backend-doc.git
+
+ 192.2.200.240:/git/repos/tcl/eticket/java/doc-gen.git DogGen
+
+ git clone ssh://loh@192.2.200.240:/git/repos/tcl/eticket/java/doc-gen.git
+ git clone loh@192.2.200.240:/git/repos/tcl/eticket/java/doc-gen.git
+
+ git clone ssh://loh@192.2.200.240:/git/repos/tcl/eticket/java/tcl-daemon.git
+
+
+Pull File
+git pull origin master
+
+Commit in local
+git status
+git add [--all][file name]
+git reset [file name]
+git commit [-m 'xxxx']
+
+--log
+/usr/smart/sass/log
+tail -f /var/log/httpd/error_log --login root
+tail -f /app/eticket/cgi/log/l20170608.log --CGI
+
+-- make
+/home/smart/tcl/eticket/backend
+make && sudo make install
+
+--Service
+path = 192.2.200.126/home/smart/tcl/service/exttcl_s
+
+-- Test Service
+192.2.200.187 cd .booboo -> ./bin/sas5_cli -peticket -madhoc -sEXT_TripLst
+
+
+--- Make Service
+
+ cp dll  /usr/smart/sass/dll
+   ~/sas5_ctl.sh restart sass
+
+--- Test POST GET (escape)
+http://192.2.200.126/eticket/cgi/curl?URL=/eticket/cgi/trans_get&DATA=token%3D123%26sessionId%3D083B8E96D2E2FFBF860E47E2B35E6D49%26transType%3DS%26channelType%3DC
+
+-e MY_INI_FILE="/app/eticket/cgi/ini/eticket.ini" \
+-e MY_LOG_DIR="/app/eticket/cgi/log"
+=============================================================
+[git-eclipes]
+add unstated Changes --> Staged Changes
+จากนั้นทำการ commit
+
+[git]
+pull จาก origin master --> branch master
+
+(master)
+$ git status
+$ git pull
+
+(อยู่ที่ปลายทางเพื่อทำการ merge จาก local branch --> branch master
+Tongta@Tongta-PC MINGW64 /d/work/TCL/develop/java/DocGen (master)
+$ git merge gen-pdf
+
+(ลบ branch local)
+Tongta@Tongta-PC MINGW64 /d/work/TCL/develop/java/DocGen (master)
+$ git branch -d gen-pdf
+Deleted branch gen-pdf (was 7ef3974).
+
+(push จาก branch master ---> origin master)
+Tongta@Tongta-PC MINGW64 /d/work/TCL/develop/java/DocGen (master)
+$ git push
+
+
+[sqldeveloper]
+192.2.200.126
+ user: tcl, pass: tcl123, service name: orcl
+[sasj3]
+log -->  /usr/smart/sasj3/log
+
+[start sasj3]
+ps -def|grep sasj
+cd /home/smart/sasj3
+./sasj3 app sharemem start
+./sasj3 app start
+
+[test post]
+/var/www/html/payment
+
+   http://192.2.200.126/payment/test-report.php
+[deploy servlet]
+/home/smart/jboss-eap-6.4/standalone/deployments
+url : http://192.2.200.126:8080/doc/Generator
+url : http://192.2.200.126:8080/doc/index.html
+printType=pdf&ticketType=1&bookCode=0001&name=สมชาย สุขโคตร&telNo=081-088-5677&email=ticket@transport.co.th&route=กรุงเทพฯ – เชียงใหม่&dtDepart=กรุงเทพ&dtArrive=เชียงใหม่่&dtDate=01/01/2018&dtTime=07:30&dtSeatNo=A1, B1&rtDepart=เชียงใหม่&rtArrive=กรุงเทพ&rtDate=05/01/2018&rtTime=17:30&rtSeatNo=C1, D1&fee=115.00&fare=331.00&discount=33.00&total=413.00&paymentDate=15/06/2560&paymentTime=17.00"
+
+
+[service]
+git clone smart@192.2.200.240:/git/repos/tcl/eticket/c/service.git service
+$ git checkout -b <branch>
+
+smart@192.2.200.240:/git/repos/tcl/eticket/java/webservice.git
+
+
+Git Life Cycle
+Staged : คือสถานะที่ไฟล์พร้อมจะ commit
+unstaged : คือไฟล์ที่ถูกแก้ไขแต่ว่ายังไม่ได้เตรียม commit
+untracked : คือไฟล์ที่ยังไม่ถูก track โดย Git (ส่วนมากจะเป็นไฟล์ที่เพิ่งสร้างใหม่)
+deleted : ไฟล์ที่ถูกลบไปแล้ว
+
+git clone loh@192.2.200.240:/git/repos/tcl/eticket/java/webservice.gitx`
+
+Checking Your Settings
+$ git config --list
+
+Initializing a Repository in an Existing Directory
+$ cd /c/user/your_repository
+$ git init
+
+
+Create the branch on your local machine and switch in this branch :
+
+$ git checkout -b [name_of_your_new_branch]
+Change working branch :
+
+$ git checkout [name_of_your_new_branch]
+Push the branch on github :
+
+$ git push origin [name_of_your_new_branch]
+
+
+[log WS]
+/home/smart/jboss-eap-6.4/standalone/log
+
+service jboss stop
+service jboss start
