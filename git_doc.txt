@@ -1,0 +1,183 @@
+﻿git feature
+- take snapshot (commit) 
+	keep only difference
+- checkout old revision
+- undo changes
+- easy to collaborate
+	สามารถเช็คเอ้าพร้อมๆกันได้ git จะทำการรวมไฟล์ให้เอง
+___________________________
+
+how to setup git repository 
+___________________________
+
+Git repository
+working tree
+	- Where you add/edit files (จุดที่เรากำลังใช้งาน)
+	- Actual state of a commit (สถานะปัจจุบัน)
+Repository
+	- History of commits
+	- Branches
+	- Tags
+	-Configs(user,pass,etc.)
+
+commit change ข้อแตกต่างระหว่าง working tree vs repository
+
+เริ่มต้นการใช้งานทุกคนต้องสร้าง repository ขึ้นมา
+จากนั้นหากมีการ แก้ไขข้อมูลที่ working tree เมื่อทำการcommit แล้ว จะทำให้ที่repository เกิดการสร้างเป็น version ต่างๆมา ในแต่ละการ commit change
+___________________________________________________________
+	== working tree ==	|	== reposity ==
+___________________________________________________________
+				|	   version1
+	   change1		|  	   version2
+	   change2		|	   version3
+____________________________________________________________
+
+เมื่อเราทำการ checkout version 1 จะทำให้ ข้อมูลใน working tree เป็นข้อมูลของ version1
+______________________________
+CREATE REPOSITORY FROM SCRATCH
+______________________________
+git init <directory> 
+คือการ create git repo ขึ้น ณ โฟลเดอร์นั้น
+
+ex:
+Tongta@Tongta-PC MINGW64 /d/work
+$ git init test-bsweb
+Initialized empty Git repository in D:/work/test-bsweb/.git/
+
+_____________________________________________
+CLONE EXISTING REPOSITORY
+เป็นคำสั้งสำหรับ clone repository ที่มีอยู่มาไว้ใน directoryของเรา
+_____________________________________________
+git clone <repository> <directory>
+
+
+
+______________________________
+how to config git repository
+______________________________
+repository config file
+1  file config มีอยู่ใน .git เป็นการตั้งค่าของ repo
+2  global config file เป็นไฟล์เก็บการตั้งค่าที่ใช้หลายๆ repo ในเครื่องนั้น
+	C:\Users\Tongta\.gitconfig
+	ค่าที่ถูกตั้งค่าในไฟล์นี้จะถูกใช้ทุกๆ repo ในเครื่องนี้
+
+
+การตั้งค่าที่ใช้บ่อยๆ
+NAME ASSOCIATE WITH COMMITTED TRANSACTION
+Set username
+git config --global user.name <name>
+
+
+
+ใส่ --global เพื่อให้มีผลทุกๆrepo
+
+EMAL ASSOCIATE WITH COMMITTED TRANSACTION
+Set email
+git config --global user.email <email>
+
+
+
+.GITIGNORE
+IGNORE FILES FORM REPOSITORY
+1 create gitignore file (txt file)
+
+[9-4]
+__________________
+commit work flow
+__________________
+
+work flow 
+
+working tree ||  ---(git add)----> || Index  ---(git commit)--->  || Repository
+
+
+ไม่ใช่ทุกๆไฟล์ทุกๆchange ใน working tree ที่ถูกจะ commit ไปยัง repository
+แต่มันจะทำการ track เฉพาะ ไฟล์ที่อยู่ใน Index เท่านั้น
+ซึ่งการจะทำให้file อยู่ใน Index เราจะทำผ่านคำสั่ง git add
+
+** git commit จะเป็นการ SAVE FILE ที่อยู่ใน index ทุกไฟล์ ลงไปยังrepository พร้อมจัดตั้ง version ขึ้นมา ***
+สรุปคำสั่งที่ต้องใใช้ในการ save to repository
+
+1 Add changes to index  (Add file contents to index or working free) ต้อทำทุกครั้งก่อน commit
+git add <file1> <file2>...<fileN>
+or
+git add -u (update change of tracked file to index) 
+ใช้กรณีที่ต้องการ update ทุกไฟล์ที่อยู่ใน repositoryอยู่แล้ว จะได้ไม่ต้องadd ที่ละไฟล์ (add เฉพาะไฟล์ที่เคยอยู่ใน repo)
+or 
+git add -A ()
+ใช้กรณีที่ต้องการadd ทุกไฟล์ แม้จะยังไม่เคยอยู่ใน REPOก็จะถูกนำเข้าไปด้วย
+
+ต้องทำการ add ก่อน commit เสมอ
+
+
+REMOVE CHANGES FROM INDEX(กรณีไม่ต้องการ track แล้ว)
+git rm <file1> <file2>... <filen>
+
+________________________________________
+
+COMMIT CHANGES
+git commit -m "<commit message>" ต้องทำการ add มาก่อนเสมอ
+or
+git commit -a -m "<commit message>" ทำการ  ADD ให้เลย
+** -a ==> git add -u  ** 
+
+
+
+File STATUS LIFE CYCLE
+untrack		unmodified			modified			state	
+(เพิ่งสร้างใหม่ )		(อยุ่ใน vc แต่ไม่มีการเปลี่ยแปลงจากcommitล่าสุด)	(อยู่ใน vc และมีการแก้ไขครั้งสุดท้ายจากcommitลาสุด)	ไฟล์ที่อยู่ใน index พร้อมcommit
+
+
+--git add------------------------------------------------------------------------->
+                 <----------------------------------------------------------------git commit
+                edit---------------------------->
+                                                git add -------------------------->
+		 <----------------------------------------------------------------git commit
+
+
+ถ้าต้องการ untrack ของที่อยู่ใน unmidified ก็ทำ GIT RM
+
+
+SHOW STATUS OF GIT REPOSITORY
+git status 
+ Display path that have difference between (โชว์ไฟลที่แตกต่างกันระหว่าง)
+	- Index and current HEAD Commit 
+	- Working tree and  index 
+	- Working tree and untrack file(never been added by git add before)
+
+____________________________________________________________________
+
+[9-5]
+(checkout commit)
+VIEW COMMIT HISTORY
+git log
+
+VIEW OLD COMMIT
+
+Update all files in working tree to match specified  commit
+git checkout <commit> //commit คือใส่เลขcheck sumลงไป(6ตัวแรก)
+
+or
+Update all files in working tree to most recent commit
+git checkout HEAD // head จะชี้ที่version ล่าสุด
+
+or
+UPdate all files in working tree to 2 commit before current commit
+git checkout HEAD~2 // เป็นการบอกว่าให้ checkout version ก่อนหน้าHead 2 version
+	
+
+การเชคเอาทั้ง คอมมิท เป็น read only operation
+เราแก้ไขอะไรไม่ได้ เป็นการเช็คเอ้าโค้ดมาดูเฉยๆ
+
+กรณีต้องการกลับมาที่ branch เดิม สามารถทำได้โดยสั้่งคำสั้ง
+git checout master
+// HEAD จะกลับมาชี้ที่ master
+
+(checkout file)
+VIEW OLD FILE
+** การเชคเอ้าเป็นไฟล์มีโอกาสที่จะแก้ไขคอมมิทปัจจุบันได้ เราจึงต้องระวัง **
+
+Check out file is read write operation
+git checkout <commit> <file>
+
+git checkout head~2 main.js
