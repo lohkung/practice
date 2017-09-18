@@ -181,10 +181,10 @@ Check out file is read write operation
 git checkout <commit> <file>
 
 git checkout head~2 main.js
-
+_____________________________________________________
 
 [10-1]
-
+_____________________________________________________
 [10-3]
 PUSH CHANGE
 Push change in working tree to remote repository
@@ -211,3 +211,38 @@ Remote alias
 git pull origin master
 Default
 git pull
+
+_____________________________________________________
+[10-4]
+sysnchronize ข้อมูลจาก remote repository
+
+กรณีทำการแก้ไขที่ local repository โดยไม่ไดทำการ pull (git pull origin master)ลงมาก่อน 
+หากมีการแก้ไขก่อนหน้าเราแล้ว เมื่อเราทำการ push จะเกิดปัญหา conflic code ขึ้น
+=====
+$ git push origin master
+To https://github.com/lohkung/practice.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/lohkung/practice.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+=====
+
+วิธีแก้ไขให้ทำการ pull ลงมาเพื่อตรวจหา conflig และทำการแก้ไขเอง 
+======
+$ git pull
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 9 (delta 3), reused 9 (delta 3), pack-reused 0
+Unpacking objects: 100% (9/9), done.
+From https://github.com/lohkung/practice
+   7f49c05..e487693  master     -> origin/master
+Auto-merging file_practice2.txt
+CONFLICT (content): Merge conflict in file_practice2.txt
+Automatic merge failed; fix conflicts and then commit the result.
+======
+
+
+เมื่อเสร็จแล้วก็ทำการ commit ได้เลย
