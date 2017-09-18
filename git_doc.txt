@@ -181,3 +181,6 @@ Check out file is read write operation
 git checkout <commit> <file>
 
 git checkout head~2 main.js
+
+
+[10-1]
