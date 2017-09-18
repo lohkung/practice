@@ -184,3 +184,30 @@ git checkout head~2 main.js
 
 
 [10-1]
+
+[10-3]
+PUSH CHANGE
+Push change in working tree to remote repository
+git push <remote-name> <branch-name>
+
+Full remote name
+git push
+git@github.com/lohkung/practice.git master
+
+Remote alias
+git push origin master
+
+Default
+git push
+
+
+PULL CHANGE
+Pull change from remote repository
+git pull <remote-name> <branch-name>
+ex:
+Full remote name
+git pull git@github.com/lohkung/practice.git master
+Remote alias
+git pull origin master
+Default
+git pull
